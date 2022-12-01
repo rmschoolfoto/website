@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Image</title>
+    <style>
+ body,h1,ul,li{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #667d8e;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+section{
+    width: 85%;
+    margin: 50px auto;
+}
+section h1{
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 2em;
+}
+ul{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.57);
+    padding-bottom: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+ul li{
+    list-style: none;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 5px 10px;
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+ul li.active{
+    background-color: rgba(41, 255, 41, 0.897);
+}
+.product{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    padding: 0 10px;
+    gap: .5rem;
+    box-sizing: border-box;
+  }
+  /* .product:before{
+    content: "inhoud";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    animation: opacity 1s ease backwards;
+    animation-delay: .5s;
+  } */
+
+.product img{
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    align-self: center;
+    animation: opacity 2s ease forwards;
+    }
+
+    @keyframes opacity{
+        0%{
+            opacity: 0;
+            transform: scale(0);
+        }
+        100%{
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    </style>
+</head>
+<body>
+    
+    <section>
+        <h1>Filter Image</h1>
+        <ul>
+            <li class="active">All Menu</li>
+            <li>Food</li>
+            <li>Car</li>
+            <li>House</li>
+            <li>Travel</li>
+        </ul>
+
+        <div class="product">
+            <img src="images/01_1.jpg" data-filter="food">
+            <img src="images/01_1.jpg" data-filter="food">
+            <img src="images/01_1.jpg" data-filter="food">
+            <img src="images/01_1.jpg" data-filter="food">
+            <img src="images/01.jpg" data-filter="car">
+            <img src="images/01_3.jpg" data-filter="car">
+            <img src="images/01_1.jpg" data-filter="car">
+            <img src="images/4.jpg" data-filter="car">
+            <img src="images/2.jpg" data-filter="house">
+            <img src="images/19jpg" data-filter="house">
+            <img src="images/16.jpg" data-filter="house">
+            <img src="images/4.jpg" data-filter="house">
+            <img src="images/bg7.jpg" data-filter="travel">
+            <img src="images/bg2.jpg" data-filter="travel">
+            <img src="images/bg9.jpg" data-filter="travel">
+            <img src="images/bg10.jpg" data-filter="travel">
+        </div>
+    </section>
+
+    <script>
+        const liItem = document.querySelectorAll('ul li');
+        console.log(liItem);
+        const imgItem = document.querySelectorAll('.product img');
+        console.log(imgItem);
+
+        liItem.forEach(li => {
+           li.addEventListener('click', function(){
+            //active
+            liItem.forEach(li => {
+                li.className = "";
+            })
+            li.className = "active";
+
+            //Filter
+            const value = li.textContent;
+            imgItem.forEach(img => {
+                img.style.display = 'none';
+                if (img.getAttribute('data-filter') == value.toLowerCase() || value == "All Menu") {
+                    img.style.display = 'block';
+                }
+            })
+           });
+        });
+    </script>
+</body>
+</html>
